@@ -1,0 +1,30 @@
+<%= render "navbar", list: @list %>
+
+<div class="container">
+
+<div class="banner">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row py-4">
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="col-4">
+          <li><%= bookmark.movie.title %></li>
+          <li><%= bookmark.comment %></li>
+          <%= link_to 'X',
+          bookmark_path(bookmark),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure ?"},
+          class: 'btn-delete' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<button type="button" class="btn btn-success" ><%= link_to 'Add a movie', new_list_bookmark_path(@list) %>
+</button>
+
+</div>
